@@ -20,14 +20,14 @@ describe Application do
       expect(response.body).to eq('Julia')
     end
 
-    xit 'should return the name Mary' do
+    it 'should return the name Mary' do
       response = get('/names?name=Mary')
 
       expect(response.status).to eq(200)
       expect(response.body).to eq('Mary')
     end
 
-    xit 'should return the name Karim' do
+    it 'should return the name Karim' do
       response = get('/names?name=Karim')
 
       expect(response.status).to eq(200)

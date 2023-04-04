@@ -4,7 +4,9 @@ require 'sinatra/reloader'
 class Application < Sinatra::Base
   
   get '/names' do
-    return "Julia"
+    name = params[:name]
+
+    return "#{name}"
   end
 
   
