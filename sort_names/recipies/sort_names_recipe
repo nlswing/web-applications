@@ -1,13 +1,13 @@
-# Get Names Route Design Recipe
+# Sort Names Route Design Recipe
 
 _Copy this design recipe template to test-drive a Sinatra route._
 
 ## 1. Design the Route Signature
 
 
- Get
- /names
- name (string)
+ Post
+ /sort-names
+ names (string)
 
 
 ## 2. Design the Response
@@ -24,14 +24,8 @@ _Replace the below with your own design. Think of all the different possible res
 <!-- EXAMPLE -->
 <!-- Response when the post is found: 200 OK -->
 
-When the query param `name` is `Julia`
-Julia
-
-When the query param `name` is `Mary`
-Mary
-
-When the query param `name` is `Karim`
-Karim
+When the query param `names` is `Joe,Alice,Zoe,Julia,Kieran`
+Alice,Joe,Julia,Kieran,Zoe
 
 
 ```
@@ -43,30 +37,15 @@ _Replace these with your own design._
 ```
 # Request:
 
-GET /names?name=Julia
+POST /sort-names
+
+# With body parameters:
+names=Joe,Alice,Zoe,Julia,Kieran
 
 # Expected response:
-Julia
+Alice,Joe,Julia,Kieran,Zoe
 ```
 
-```
-# Request:
-
-GET /names?name=Mary
-
-# Expected response:
-
-Mary
-```
-```
-# Request:
-
-GET /names?name=Karim
-
-# Expected response:
-
-Karim
-```
 
 ## 4. Encode as Tests Examples
 
@@ -81,28 +60,32 @@ describe Application do
 
   let(:app) { Application.new }
 
-  context "GET /names" do
-    it 'should return the name Julia' do
-      response = get('/names?name=Julia')
+  context "POST to /sort-names" do
+    it "returns 200 OK with the right content" do
+      # Send a POST request to /submit
+      # with some body parameters
+      # and returns a response object we can test.
+      response = post("/sort-names", names: "Joe,Alice,Zoe,Julia,Kieran")
 
+      # Assert the response status code and body.
       expect(response.status).to eq(200)
-      expect(response.body).to eq('Julia')
-    end
-
-    it 'should return the name Mary' do
-      response = get('/names?name=Mary')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to eq('Mary')
-    end
-
-    it 'should return the name Karim' do
-      response = get('/names?name=Karim')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to eq('Karim')
+      expect(response.body).to eq("Joe,Alice,Zoe,Julia,Kieran")
     end
   end
+
+  context "POST to /sort-names" do
+    it "returns 200 OK with the right content in alphabetical order" do
+      # Send a POST request to /submit
+      # with some body parameters
+      # and returns a response object we can test.
+      response = post("/sort-names", names: "Joe,Alice,Zoe,Julia,Kieran")
+
+      # Assert the response status code and body.
+      expect(response.status).to eq(200)
+      expect(response.body).to eq("Alice,Joe,Julia,Kieran,Zoe)
+    end
+  end
+   
 end
 ```
 

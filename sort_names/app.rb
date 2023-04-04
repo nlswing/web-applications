@@ -3,11 +3,17 @@ require 'sinatra/reloader'
 
 class Application < Sinatra::Base
   
-  get '/names' do
-    name = params[:name]
+  post '/sort-names' do
+    names = params[:names]
 
-    return "#{name}"
+    return names.split(",").sort
   end
+
+  
+
+  
+
+    
 
   
   configure :development do
