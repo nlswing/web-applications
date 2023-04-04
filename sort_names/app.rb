@@ -6,7 +6,7 @@ class Application < Sinatra::Base
   post '/sort-names' do
     names = params[:names]
 
-    return names.split(",").sort
+    return names.split(",").sort.join(",")
   end
 
   

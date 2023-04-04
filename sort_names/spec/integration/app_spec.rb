@@ -11,19 +11,6 @@ describe Application do
   let(:app) { Application.new }
 
   context "POST to /sort-names" do
-    it "returns 200 OK with the right content" do
-      # Send a POST request to /submit
-      # with some body parameters
-      # and returns a response object we can test.
-      response = post("/sort-names", names:"Joe,Alice,Zoe,Julia,Kieran")
-
-      # Assert the response status code and body.
-      expect(response.status).to eq(200)
-      expect(response.body).to eq("Joe,Alice,Zoe,Julia,Kieran")
-    end
-  end
-
-  context "POST to /sort-names" do
     it "returns 200 OK with the right content in alphabetical order" do
       # Send a POST request to /submit
       # with some body parameters
